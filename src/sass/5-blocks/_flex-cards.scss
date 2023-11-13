@@ -1,7 +1,6 @@
-/* Add Card Button Styles */
 .flex-cards__add-button {
 	margin-top: 10px;
-	background-color: #4caf50;
+	background-color: $colorPrimary;
 	color: #fff;
 	border: none;
 	padding: 10px 15px;
@@ -11,14 +10,13 @@
 }
 
 .flex-cards__add-button:hover {
-	background-color: #2b612d;
+	background-color: darken($colorPrimary, 10%);
 	color: #fff;
 }
 
-/* Remove Card Button Styles */
 .flex-cards__remove-button {
 	margin-top: 10px;
-	background-color: #f44336;
+	background-color: $colorSecondary;
 	color: #fff;
 	border: none;
 	padding: 10px 15px;
@@ -28,13 +26,74 @@
 }
 
 .flex-cards__remove-button:hover {
-	background-color: #d32f2f;
+	background-color: darken($colorSecondary, 10%);
+	color: #fff;
 }
 
 .flex-cards__wrapper {
 	display: flex;
+	flex-wrap: wrap;
+  width: calc(100% + 30px);
+	margin: -15px;
 }
 
 .flex-cards__item {
+	padding: 15px;
+}
+
+.flex-cards__2 .flex-cards__item {
+	width: 50%;
+}
+
+.flex-cards__2.admin-edit .flex-cards__item {
+	width: 45%;
+}
+
+.flex-cards__3 .flex-cards__item {
+	width: 33.333%;
+}
+
+.flex-cards__3.admin-edit .flex-cards__item {
+	width: 30%;
+}
+
+.flex-cards__4 .flex-cards__item {
 	width: 25%;
+}
+
+.flex-cards__4.admin-edit .flex-cards__item {
+	width: 22%;
+}
+
+.flex-cards__link-wrapper {
+	text-decoration: none;
+	color: #000;
+	@include transition;
+
+	&:hover {
+		color: $colorSecondary;
+	}
+}
+
+.flex-cards__image-box {
+	position: relative;
+	aspect-ratio: 16/9;
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+
+.flex-cards__image-box img {
+	position: absolute;
+	object-fit: cover;
+	height: 100%;
+	width: 100%;
+	@include transition;
+}
+
+.flex-cards__image-box:hover img {
+  transform: scale(1.1);
+}
+
+.flex-cards__title {
+	font-size: 22px;
 }

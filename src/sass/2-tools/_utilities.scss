@@ -1,0 +1,16 @@
+.container {
+
+	@include container;
+}
+
+.gutter {
+	padding: 45px $gutter;
+
+	.gutter {
+		padding: 35px 0;
+	}
+
+	.side-gutter {
+		padding: 0 0;
+	}
+}

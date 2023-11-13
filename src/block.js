@@ -1,6 +1,6 @@
 const { registerBlockType } = wp.blocks;
-const { RichText, MediaUpload, InspectorControls } = wp.editor;
-const { Button, RangeControl, PanelBody } = wp.components;
+const { RichText, MediaUpload, InspectorControls, BlockControls } = wp.editor;
+const { Button, RangeControl, PanelBody, RadioControl, Toolbar } = wp.components;
 import './style.scss';
 
 // Custom Hero Block
@@ -46,7 +46,21 @@ registerBlockType('custom-block-plugin/custom-hero-block', {
     };
 
     return (
-      <section id="hero-general" className="hero-general-section">
+      <section className="hero-general-section">
+        <BlockControls>
+          {/* Toolbar for moving the block */}
+          <Toolbar>
+            <MediaUpload
+              onSelect={onImageSelect}
+              type="image"
+              value={heroGeneralImage}
+              render={({ open }) => (
+                <Button onClick={open} icon="format-image">Select Image</Button>
+              )}
+            />
+          </Toolbar>
+        </BlockControls>
+
         <InspectorControls>
           {/* Font Size Settings Panel */}
           <PanelBody title="Font Size Settings">
@@ -68,6 +82,7 @@ registerBlockType('custom-block-plugin/custom-hero-block', {
             />
           </PanelBody>
         </InspectorControls>
+
         <div className="hero-general__image-box burns-container">
           {/* Media Upload Button */}
           <MediaUpload
@@ -119,7 +134,7 @@ registerBlockType('custom-block-plugin/custom-hero-block', {
     `;
 
     return (
-      <section id="hero-general" className="hero-general-section">
+      <section className="hero-general-section">
         {/* Styles for controlling font size */}
         <style>{styles}</style>
         <div className="hero-general__image-box burns-container">
@@ -152,9 +167,13 @@ registerBlockType('custom-block-plugin/flex-cards-block', {
       type: 'array',
       default: [],
     },
+    blocksPerRow: {
+      type: 'string',
+      default: '2',
+    },
   },
   edit: (props) => {
-    const { attributes: { flexCards }, setAttributes } = props;
+    const { attributes: { flexCards, blocksPerRow }, setAttributes } = props;
 
     // Handler for title change in each card
     const onTitleChange = (newTitle, index) => {
@@ -198,6 +217,11 @@ registerBlockType('custom-block-plugin/flex-cards-block', {
       setAttributes({ flexCards: updatedCards });
     };
 
+    // Handler for blocks per row change
+    const onBlocksPerRowChange = (value) => {
+      setAttributes({ blocksPerRow: value });
+    };
+
     return (
       <>
         <InspectorControls>
@@ -205,6 +229,19 @@ registerBlockType('custom-block-plugin/flex-cards-block', {
           <PanelBody title="Flex Cards">
             {/* Button to add a new card */}
             <Button className="flex-cards__add-button" onClick={addCard}>Add Card</Button>
+          </PanelBody>
+          {/* Radio control for selecting blocks per row */}
+          <PanelBody title="Blocks Per Row">
+            <RadioControl
+              label="Blocks Per Row"
+              selected={blocksPerRow}
+              options={[
+                { label: '2', value: '2' },
+                { label: '3', value: '3' },
+                { label: '4', value: '4' },
+              ]}
+              onChange={onBlocksPerRowChange}
+            />
           </PanelBody>
         </InspectorControls>
 
@@ -214,7 +251,7 @@ registerBlockType('custom-block-plugin/flex-cards-block', {
         </div>
 
         {/* Displaying the list of flex cards */}
-        <div className="flex-cards__wrapper">
+        <div className={`flex-cards__wrapper flex-cards__${blocksPerRow} admin-edit`}>
           {flexCards.map((card, index) => (
             <div key={index} className="flex-cards__item">
               {/* Media Upload Button for Image */}
@@ -227,11 +264,13 @@ registerBlockType('custom-block-plugin/flex-cards-block', {
                 )}
               />
               {card.image && (
-                <img
-                  src={card.image}
-                  alt={`Flex Card ${index + 1} Image`}
-                  style={{ maxWidth: '100%' }}
-                />
+                <div class="flex-cards__image-box">
+									<img
+										src={card.image}
+										alt={`Flex Card ${index + 1} Image`}
+										style={{ maxWidth: '100%' }}
+									/>
+								</div>
               )}
               <div className="flex-cards-content">
                 {/* RichText Editor for Title */}
@@ -259,7 +298,9 @@ registerBlockType('custom-block-plugin/flex-cards-block', {
                   placeholder="Enter link"
                 />
                 {/* Button to remove the card */}
-                <Button className="flex-cards__remove-button" onClick={() => removeCard(index)}>Remove Card</Button>
+                <div>
+									<Button className="flex-cards__remove-button" onClick={() => removeCard(index)}>Remove Card</Button>
+								</div>
               </div>
             </div>
           ))}
@@ -268,17 +309,19 @@ registerBlockType('custom-block-plugin/flex-cards-block', {
     );
   },
   save: (props) => {
-    const { attributes: { flexCards } } = props;
+    const { attributes: { flexCards, blocksPerRow } } = props;
 
     // Function to render each flex card item
     const renderFlexCardItems = (card, index) => (
       <div className="flex-cards__inner">
         {card.image && (
-          <img
-            src={card.image}
-            alt={`Flex Card ${index + 1} Image`}
-            style={{ maxWidth: '100%' }}
-          />
+          <div class="flex-cards__image-box">
+						<img
+							src={card.image}
+							alt={`Flex Card ${index + 1} Image`}
+							style={{ maxWidth: '100%' }}
+						/>
+					</div>
         )}
         <div className="flex-cards-content">
           {/* Title of the flex card */}
@@ -294,7 +337,7 @@ registerBlockType('custom-block-plugin/flex-cards-block', {
     );
 
     return (
-      <section id="flex-cards" className="flex-cards-section">
+      <section className={`flex-cards-section flex-cards__${blocksPerRow} gutter`}>
         {/* Wrapper for flex cards */}
         <div className="flex-cards__wrapper container">
           {flexCards.map((card, index) => (
