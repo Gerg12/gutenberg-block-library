@@ -1,0 +1,51 @@
+@mixin reset-spacing {
+	margin-bottom: 0;
+}
+
+@mixin container {
+	margin: 0 auto;
+	max-width: $container;
+	width: 100%;
+}
+
+@mixin mobile-up {
+
+	@media (min-width: #{$mobile}) {
+		@content;
+	}
+}
+
+@mixin mobile-down {
+
+	@media (max-width: #{$mobile - 1px}) {
+		@content;
+	}
+}
+
+@mixin tablet-up {
+
+	@media (min-width: #{$tablet}) {
+		@content;
+	}
+}
+
+@mixin tablet-down {
+
+	@media (max-width: #{$tablet - 1px}) {
+		@content;
+	}
+}
+
+@mixin desktop-up {
+
+	@media (min-width: #{$desktop}) {
+		@content;
+	}
+}
+
+@mixin desktop-down {
+
+	@media (max-width: #{$desktop - 1px}) {
+		@content;
+	}
+}
