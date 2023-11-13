@@ -14,6 +14,8 @@ This WordPress plugin enhances the Gutenberg block editor by introducing a custo
 3. Customize the block settings, including title, text, image, and buttons.
 4. Save the post/page.
 
+![image](https://github.com/Gerg12/gutenberg-block-library/assets/25252407/ed27c68d-61df-4285-b41d-79306b092181)
+
 ## Custom Hero Block Features
 
 - **Title:** Add a custom title for the hero block.
@@ -37,6 +39,8 @@ The custom hero block provides a visually appealing and customizable way to enha
 ## Flex Cards Block
 
 In addition to the custom hero block, this plugin also introduces a "Flex Cards Block" that allows you to create dynamic and responsive card layouts.
+
+![image](https://github.com/Gerg12/gutenberg-block-library/assets/25252407/ff648cb2-2b82-400d-9f9a-4f0f6e1b06c7)
 
 ### Flex Cards Block Features
 
