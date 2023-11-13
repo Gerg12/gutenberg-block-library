@@ -1,0 +1,40 @@
+/* Add Card Button Styles */
+.flex-cards__add-button {
+	margin-top: 10px;
+	background-color: #4caf50;
+	color: #fff;
+	border: none;
+	padding: 10px 15px;
+	cursor: pointer;
+	border-radius: 4px;
+	font-size: 14px;
+}
+
+.flex-cards__add-button:hover {
+	background-color: #2b612d;
+	color: #fff;
+}
+
+/* Remove Card Button Styles */
+.flex-cards__remove-button {
+	margin-top: 10px;
+	background-color: #f44336;
+	color: #fff;
+	border: none;
+	padding: 10px 15px;
+	cursor: pointer;
+	border-radius: 4px;
+	font-size: 14px;
+}
+
+.flex-cards__remove-button:hover {
+	background-color: #d32f2f;
+}
+
+.flex-cards__wrapper {
+	display: flex;
+}
+
+.flex-cards__item {
+	width: 25%;
+}

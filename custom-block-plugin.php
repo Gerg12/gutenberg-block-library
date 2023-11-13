@@ -45,44 +45,5 @@ function custom_block_register_block() {
         true
     );
 
-    // Register the block type
-    register_block_type('custom-block-plugin/hero-general', array(
-        'editor_script' => 'custom-block',
-        'render_callback' => 'custom_block_render_callback',
-        'attributes' => array(
-            'heroGeneralTitle' => array(
-                'type' => 'string',
-                'default' => 'Default Title',
-                'source' => 'html',
-                'selector' => '.hero-general__title',
-            ),
-            'heroGeneralImage' => array(
-                'type' => 'string',
-                'default' => null,
-            ),
-        ),
-    ));
-}
 
-add_action('init', 'custom_block_register_block');
-
-function custom_block_render_callback($attributes, $content) {
-    // Check if heroGeneralImage key exists in attributes, if not, provide a default value
-    $heroGeneralImage = isset($attributes['heroGeneralImage']) ? esc_url($attributes['heroGeneralImage']) : '';
-
-    ob_start(); ?>
-
-    <section id="hero-general" class="hero-general-section render">
-
-        <div class="hero-general__image-box burns-container">
-            <img class="burns-background-image" src="<?php echo $heroGeneralImage; ?>">
-            <div class="hero-general-content">
-							<h2 class="hero-general__title"><?php echo esc_html($attributes['heroGeneralTitle']); ?></h2>
-            </div>
-        </div>
-
-    </section>
-
-<?php
-    return ob_get_clean();
 }
