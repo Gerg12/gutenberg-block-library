@@ -1,6 +1,6 @@
 # Custom Block Plugin
 
-This WordPress plugin enhances the Gutenberg block editor by introducing a custom hero block with unique features.
+This WordPress plugin enhances the Gutenberg block editor by introducing a custom hero block and a custom flex cards block with unique features.
 
 ## Installation
 
