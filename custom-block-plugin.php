@@ -3,7 +3,7 @@
  * Plugin Name: Custom Block Plugin
  * Description: Custom Hero Block for WordPress.
  * Version: 1.0.0
- * Author: Your Name
+ * Author: Greg Johnson
  */
 
 // Exit if accessed directly.
